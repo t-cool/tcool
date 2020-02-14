@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% load static %}
+
+{% block content %}
+    <div id="grammar_history_rows">
+        {% if search_history|length == 0 %}
+            <div class="row history_row">
+                <div class="col-md-6 text-center">
+                    <img src="{% static 'canvas.png' %}" alt="No history" id="blank_history_illustration">
+                    <h4>Looks like you haven't searched anything yet...</h4>
+                </div>
+            </div>
+        {% endif %}
+        {% for history in search_history %}
+            <div class="history_row row">
+                <div class="col-md-6">
+                    <a class="history-card" href="{% url 'check_grammar_page_history' id=history.id %}">
+                        <div class="card" style="width: 100%">
+                            <div class="card-body">
+                                <p class="card-text">{{ history.search_text }}</p>
+                                <span class="text-muted">🕒 {{ history.created_at | naturaltime }}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <br/>
+        {% endfor %}
+    </div>
+{% endblock %}

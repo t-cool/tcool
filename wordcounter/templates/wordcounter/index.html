@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="row text-center" id="index_page_hero">
+        <div class="col-md-6">
+            <h1>T-cool</h1>
+            <p class="lead">Learn English and Programming</p>
+            <img id="index_lead_img" src="{% static 'studying.png' %}"
+                 alt="Illustration of student studying"
+                 class="my-3"
+            />
+        </div>
+    </div>
+{% endblock %}

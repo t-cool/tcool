@@ -1,0 +1,17 @@
+#index_lead_img, #blank_history_illustration {
+    max-width: 80%;
+    height: auto;
+}
+
+#index_page_hero {
+    justify-content: center;
+}
+
+a.history-card, a.history-card:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.history_row {
+    justify-content: center;
+}

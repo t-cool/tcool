@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+    {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+
+    <form method="post" action="{% url 'login_page' %}">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="id_username">Username</label>
+                    {% render_field form.username class="form-control" placeholder="Username" %}
+                </div>
+                <div class="form-group">
+                    <label for="id_password">Password</label>
+                    {% render_field form.password class="form-control" placeholder="•••••••••" %}
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Sign in</button>
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+
+
+{% endblock %}

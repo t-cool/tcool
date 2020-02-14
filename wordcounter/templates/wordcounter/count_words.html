@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <form action="{% url 'count_words_page' %}" method="post">
+                {% csrf_token %}
+                {% if history_item %}
+                    <span class="text-muted" style="float: right;">🕒 {{ history_item.created_at | naturaltime }}</span>
+                {% endif %}
+                <div class="form-group">
+                    {{ form.text_input.label_tag }}
+                    {{ form.text_input }}
+                </div>
+                <input type="hidden" value="{{ history_item.id }}" name="id" />
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a class="btn btn-secondary" style="float: right;" href="{% url 'word_count_history_page' %}">Show History</a>
+            </form>
+        </div>
+        {% if sorted_word_counts %}
+            <div class="col-md-6">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Word</th>
+                        <th scope="col">Count</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for word, count in sorted_word_counts %}
+                        <tr>
+                            <th scope="row">{{ word }}</th>
+                            <td>{{ count }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
